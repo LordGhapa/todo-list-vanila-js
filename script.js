@@ -56,20 +56,24 @@ const defaultList = {
 let list = JSON.parse(localStorage.getItem('list'))
 const toDo = document.querySelector('#to-do')
 const done = document.querySelector('#done')
+const form = document.querySelector('#form')
 if (!list) {
   localStorage.setItem('list', JSON.stringify(defaultList))
   list = JSON.parse(localStorage.getItem('list'))
 }
 
 function getListData() {
-  /*   toDo.innerHTML=""
-  done.innerHTML="" */
+  toDo.innerHTML = ''
+  done.innerHTML = ''
   let lastItem
 
   list.to_do_list.forEach((itm, index) => {
     renderToDoItem(itm, index)
     lastItem = index
   })
+
+  lastItem++
+  createNewItemFields(lastItem)
 }
 
 function renderToDoItem(itm, index) {
@@ -102,6 +106,8 @@ function renderToDoItem(itm, index) {
   const checkBtn = document.createElement('span')
   checkBtn.classList.add('material-symbols-outlined')
   checkBtn.title = 'segure para apaga este item'
+  checkBtn.addEventListener('long-press', removeItem)
+  checkBtn.setAttribute('data-long-press-delay', '100')
   checkBtn.id = index
 
   wrapper.appendChild(itmData)
@@ -118,4 +124,92 @@ function renderToDoItem(itm, index) {
 function autoResize() {
   this.style.height = '1.5rem'
   this.style.height = this.scrollHeight + 'px'
+}
+
+function createNewItemFields(index) {
+  const newItmWrapper = document.createElement('div')
+  const newItmData = document.createElement('div')
+  const newTitle = document.createElement('textarea')
+  newTitle.name = `n${index}-title`
+  newTitle.maxLength = 30
+  newTitle.placeholder = '🌟 Crie Uma Nova Tarefa...'
+
+  newTitle.addEventListener('change', handleItemsSubmit)
+
+  const newDesc = document.createElement('textarea')
+  newDesc.name = `n${index}-desc`
+  newDesc.style.height = '1.5rem'
+  newDesc.style.height = this.scrollHeight + 'px'
+  newDesc.placeholder = 'Note description'
+  newDesc.addEventListener('input', autoResize, false)
+  newDesc.addEventListener('change', autoResize, false)
+  newDesc.addEventListener('change', handleItemsSubmit)
+
+  const newCompleted = document.createElement('input')
+  newCompleted.type = 'hidden'
+  newCompleted.name = `n${index}-completed`
+
+  newItmData.classList.add('itm-data')
+  newItmData.appendChild(newTitle)
+  newItmData.appendChild(newDesc)
+  newItmData.appendChild(newCompleted)
+
+  newItmWrapper.appendChild(newItmData)
+  toDo.appendChild(newItmWrapper)
+}
+
+function handleItemsSubmit(e) {
+  const formData = new FormData(form)
+
+  // Creating an empty to-do list
+  const todoObject = {
+    to_do_list: []
+  }
+
+  const formValues = formData.values()
+
+  for (const itx of formValues) {
+    let title = itx
+    let description = formValues.next().value
+    let completed = formValues.next().value
+
+    if (title.trim() !== '' || description.trim() !== '') {
+      todoObject.to_do_list.push({
+        title,
+        description,
+        completed: completed === 'true'
+      })
+    }
+  }
+
+  let listSizes = [list.to_do_list.length, todoObject.to_do_list.length]
+
+  list = todoObject
+  saveItemsStorage()
+
+  if (listSizes[0] < listSizes[1]) {
+    getListData()
+  }
+}
+function saveItemsStorage() {
+  localStorage.setItem('list', JSON.stringify(list))
+}
+function removeItem(e) {
+  let idToRemove = e.target.id
+  const filteredList = list.to_do_list.filter((itm, index) => {
+    return index != idToRemove
+  })
+  list.to_do_list = filteredList
+
+  anime({
+    targets: e.target.parentElement,
+    duration: 500,
+    translateX: [0, 50],
+    opacity: [1, 0],
+    easing: 'easeInExpo',
+    completed: function (anim) {
+      getListData()
+      saveItemsStorage()
+    }
+  })
 }
