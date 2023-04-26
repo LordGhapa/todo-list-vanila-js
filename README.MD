@@ -1,4 +1,4 @@
-<h1 align="center">To Do List</h1>
+<h1 align="center">To Do List(Lista de Tarefas)</h1>
 
 ![image](https://user-images.githubusercontent.com/99082399/234659122-90130bb1-e5e4-49de-a0c4-65be9f81aa0a.png)
 
