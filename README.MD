@@ -21,10 +21,13 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - HTML e CSS
 - JavaScript
+- [Animejs](https://github.com/juliangarnier/anime)
+- [Long press Event](https://github.com/john-doherty/long-press-event)
+
 
 ## 💻 Projeto
 
-Exemplo de Landing Page para Uma Clinica Medica
+Simple lista de Tarefas usando html,css,js e algumas lib com animejs e long-press-event
 
 - [Acesse o projeto finalizado, online](lordghapa.github.io/todo-list-vanila-js/)
 
