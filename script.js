@@ -119,7 +119,7 @@ function renderToDoItem(itm, index) {
   checkBtn.title = 'Segure para apaga este item'
   checkBtn.addEventListener('long-press', removeItem)
   checkBtn.addEventListener('click', checkItem)
-  checkBtn.setAttribute('data-long-press-delay', '100')
+  checkBtn.setAttribute('data-long-press-delay', '300')
   checkBtn.id = index
 
   wrapper.appendChild(itmData)
