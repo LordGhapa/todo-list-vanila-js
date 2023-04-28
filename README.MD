@@ -29,7 +29,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Simple lista de Tarefas usando html,css,js e algumas lib com animejs e long-press-event
 
-- [Acesse o projeto finalizado, online](https://lordghapa.github.io/app-controle-de-peso/)
+- [Acesse o projeto finalizado, online](https://lordghapa.github.io/todo-list-vanila-js/)
 
 
 ## :memo: Licença
