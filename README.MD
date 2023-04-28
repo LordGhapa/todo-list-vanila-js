@@ -1,6 +1,6 @@
 <h1 align="center">To Do List(Lista de Tarefas)</h1>
 
-![image](https://user-images.githubusercontent.com/99082399/234659122-90130bb1-e5e4-49de-a0c4-65be9f81aa0a.png)
+![image](https://user-images.githubusercontent.com/99082399/235148297-2d2b7d4a-f2a9-4c19-b09b-d9bb9ced8305.png)
 
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
